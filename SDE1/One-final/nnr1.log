@@ -1,0 +1,53 @@
+Last login: Mon Jul 15 10:36:03 on ttys000
+Clares-MacBook-Pro:~ clarekirkland$ ls
+Applications	Documents	Library		Music		Public
+Desktop		Downloads	Movies		Pictures
+Clares-MacBook-Pro:~ clarekirkland$ cd Documents
+Clares-MacBook-Pro:Documents clarekirkland$ cd Clemson
+Clares-MacBook-Pro:Clemson clarekirkland$ cd 3520-ProgrammingSystems
+Clares-MacBook-Pro:3520-ProgrammingSystems clarekirkland$ cd SDEs
+Clares-MacBook-Pro:SDEs clarekirkland$ cd One-July16
+Clares-MacBook-Pro:One-July16 clarekirkland$ cd One-temp
+Clares-MacBook-Pro:One-final clarekirkland$ ocaml
+        OCaml version 4.07.1
+
+# #use "nnr1.caml";;
+val printIt : float list -> unit = <fun>
+val prepend : 'a list -> 'a -> 'a list = <fun>
+val least : 'a list -> 'a = <fun>
+val find : 'a -> 'a list -> int = <fun>
+val getIDX : int -> 'a list -> 'a = <fun>
+val printList : float list list -> unit = <fun>
+val theClass : 'a list -> 'a = <fun>
+val distanceR2 : float list -> float list -> float = <fun>
+val distanceAllVectors2 : float list -> float list list -> float list = <fun>
+val nnr1 : float list -> float list list -> float = <fun>
+# printList [[5.;5.;1.];[5.;-5.;2.];[-5.;-5.;3.];[-5.;5.;4.]];;
+5. 5. 1.
+5. -5. 2.
+-5. -5. 3.
+-5. 5. 4.
+- : unit = ()
+# printList [[9.;4.;2.];[5.;-2.;1.];[-6.;-6.;0.];[-3.;5.;7.]];;
+9. 4. 2.
+5. -2. 1.
+-6. -6. 0.
+-3. 5. 7.
+- : unit = ()
+# theClass [9.;1.;4.];;
+- : float = 4.
+# theClass [7.;1.;5. ;2.;7. ;9.;6.];;
+- : float = 6.
+# distanceR2 [5.;5.;1.] [9.;-4.;7.];;
+- : float = 97.
+# distanceR2 [1.;4.;9.] [6.;4.;1.];;
+- : float = 25.
+# distanceAllVectors2 [9.;-4.;0.] [[5.;5.;1.];[5.;-5.;2.];[-5.;-5.;3.];[-5.;5.;4.]];;
+- : float list = [97.; 17.; 197.; 277.]
+# distanceAllVectors2 [4.;-1.;0.] [[9.;4.;2.];[5.;-2.;1.];[-6.;-6.;0.];[-3.;5.;7.]];;
+- : float list = [50.; 2.; 125.; 85.]
+# nnr1 [9.;-4.;0.] [[5.;5.;1.];[5.;-5.;2.];[-5.;-5.;3.];[-5.;5.;4.]];;
+- : float = 2.
+# nnr1 [4.;-1.;0.] [[9.;4.;2.];[5.;-2.;1.];[-6.;-6.;0.];[-3.;5.;7.]];;
+- : float = 1.
+#

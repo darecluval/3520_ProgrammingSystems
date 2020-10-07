@@ -1,0 +1,78 @@
+(* SDE1
+ * Clare DuVal
+ * CPSC 3520
+ *)
+
+(* Helper functions *)
+(*val printIt : float list -> unit = <fun>*)
+let rec printIt = function
+  [] -> ()
+  | x::y -> print_float x ; print_string " " ; printIt y;;
+
+(*val prepend : 'a list -> 'a -> 'a list = <fun>*)
+let rec prepend a x =
+  match a with
+  [] -> [x]
+  | x1::x2 -> x::(prepend x2 x1)
+
+(*val least : 'a list -> 'a = <fun>*)
+let rec least x =
+  match x with
+  [] -> failwith "Empty list"
+  | [x] -> x
+  | x1::x2 ->
+    let y = least x2 in
+      if x1 < y then
+        x1
+      else
+        y
+
+(*val find : 'a -> 'a list -> int = <fun>*)
+let rec find x a =
+  match a with
+  [] -> -1
+  | x1::x2 -> if x = x1 then 0
+      else 1 + find x x2;;
+
+(*val getIDX : int -> 'a list -> 'a = <fun>*)
+let rec getIDX x a =
+  match x, a with
+  _, [] -> failwith "Empty list"
+  | 0, a::_ -> a
+  | x, x1::x2 -> getIDX (x-1) x2;;
+
+(* 1: printList Function *)
+(*val printList : float list list -> unit = <fun>*)
+let rec printList = function
+  [] -> ()
+  | x::y -> printIt x ; print_string "\n" ; printList y;;
+
+(* 2: theClass Function *)
+(*val theClass: 'a list -> 'a = <fun>*)
+let rec theClass = function
+  [] -> failwith "No class found."
+  | [x] -> x
+  | x::y -> theClass y;;
+
+(* 3: distanceR2 Function *)
+(*val distanceR2 : float list * float list -> float = <fun>*)
+let rec distanceR2 x y =
+  match x, y with
+  | [x], [y] -> distanceR2 [] []
+  | x1::x2, y1::y2 -> (y1 -. x1)**2. +. distanceR2 x2 y2
+  | _ -> 0.;; (* single vs more *)
+
+(* 4: distanceAllVectors2 Function *)
+(*val distanceAllVectors2 : float list * float list list -> float list = <fun>*)
+let rec distanceAllVectors2 x y =
+  match x, y with
+  | _, [] -> []
+  | x, [y] -> prepend [] (distanceR2 x y)
+  | x, y1::y2 -> prepend (distanceAllVectors2 x y2) (distanceR2 x y1);;
+
+(* 5: nnr1 Function *)
+(*val nnr1 : float list * float list list -> float = <fun>*)
+let nnr1 x y =
+  match x, y with
+  | _, [] -> 0.
+  | x, y1::y2 -> theClass (getIDX (find (least (distanceAllVectors2 x y)) (distanceAllVectors2 x y)) y);;
